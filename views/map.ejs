@@ -1,0 +1,131 @@
+<%- include header %>
+
+    <div class="container-fluid p-5 bg-dark text-white text-center">
+        <h1>Map</h1>
+    </div>
+    <div class="row mb-5">
+        <div class="col-md-8 mx-auto text-center">
+            <h3>This is where you can find the location of places from the menu.</h3>
+        </div>
+    </div>
+    <div id="map"></div>
+    <script>
+        function initMap(){
+            var options = {
+                zoom:10,
+                center:{lat:40.7128, lng:-74.0060}
+            }  
+            var map = new google.maps.Map(document.getElementById('map'), options);
+
+            //Custom icons 
+            var foodicon = 'http://maps.google.com/mapfiles/kml/pal2/icon43.png';
+            var museumsicon = '/img/museumicon.png';
+            var zoosicon = '/img/zooicon.png';
+            var parksicon = 'http://maps.google.com/mapfiles/kml/pal2/icon4.png';
+
+            //Array of markers
+            var markers = [
+                //Food/dining markers
+                {
+                    coords:{lat:40.69013, lng:-73.98200},
+                    iconImage: foodicon,
+                    content: '<h5>Junior&#8217s Restaurant</h5>'
+                },
+                {
+                    coords:{lat:40.575195, lng:-73.981728},
+                    iconImage: foodicon,
+                    content: '<h5>Nathan&#8217s Famous</h5>'
+                },
+                {
+                    coords:{lat:40.722195, lng:-73.987480},
+                    iconImage: foodicon,
+                    content: '<h5>Katz&#8217s Delicatessen</h5>'
+                },
+                //Museum markers
+                {
+                    coords:{lat:40.7813, lng:-73.9740},
+                    iconImage: museumsicon,
+                    content: '<h5>American Museum of Natural History</h5>'
+                },
+                {
+                    coords:{lat:40.7614, lng:-73.9776},
+                    iconImage: museumsicon,
+                    content: '<h5>Museum of Modern Art</h5>'
+                },
+                {
+                    coords:{lat:40.7239, lng:-73.9979},
+                    iconImage: museumsicon,
+                    content: '<h5>Museum of Ice Cream</h5>'
+                },
+                //Zoo markers
+                {
+                    coords:{lat:40.8506, lng:-73.8770},
+                    iconImage: zoosicon,
+                    content: '<h5>Bronx Zoo</h5>'
+                },
+                {
+                    coords:{lat:40.6251, lng:-74.1154},
+                    iconImage: zoosicon,
+                    content: '<h5>Staten Island Zoo</h5>'
+                },
+                {
+                    coords:{lat:40.7440, lng:-73.8492},
+                    iconImage: zoosicon,
+                    content: '<h5>Queens Zoo</h5>'
+                },
+                //Park markers
+                {
+                    coords:{lat:40.7812, lng:-73.9665},
+                    iconImage: parksicon,
+                    content: '<h5>Central Park</h5>'
+                },
+                {
+                    coords:{lat:40.7536, lng:-73.9832},
+                    iconImage: parksicon,
+                    content: '<h5>Bryant Park</h5>'
+                },
+                {
+                    coords:{lat:40.7400, lng:-73.8407},
+                    iconImage: parksicon,
+                    content: '<h5>Flushing Meadows Corona Park</h5>'
+                }
+            ];
+
+            //Loop through markers
+            for(var i = 0;i < markers.length;i++){
+                // Add marker
+                addMarker(markers[i]);
+            }
+
+            //Add Marker Function
+            function addMarker(props){
+                var marker = new google.maps.Marker({
+                position:props.coords,
+                map:map,
+                //icon:props.iconImage
+                });
+
+                //Check for customicon
+                if(props.iconImage){
+                //Set icon image
+                marker.setIcon(props.iconImage);
+                }
+
+                //Check content
+                if(props.content){
+                var infoWindow = new google.maps.InfoWindow({
+                    content:props.content
+                });
+
+                marker.addListener('click', function(){
+                    infoWindow.open(map, marker);
+                });
+                }
+            }
+        }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGgdjVLCQrQvVTGs1si4_Hl7D5OxQQRos&callback=initMap">
+    </script>
+
+<%- include footer %>

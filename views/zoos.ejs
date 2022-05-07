@@ -1,0 +1,89 @@
+<%- include header %>
+
+<div class="container-fluid p-5 bg-dark text-white text-center">
+  <h1>Zoos</h1>
+</div>
+  
+ <section id="zoos" class="bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto text-center">
+                    <h3>If you want to see animals at the zoo, this is where to find them in NYC.</h3>
+                </div>
+            </div>
+            <div class="card mb-3">
+              <div class="text-center">
+                <img class="card-img-top" src="/img/dholes.jpg" alt="Card image cap"  style="width: 24rem">
+                <img class="card-img-top" src="/img/bronxzoo.jpg" alt="Card image cap"  style="width: 22rem">
+                <img class="card-img-top" src="/img/bronx.jpg" alt="Card image cap"  style="width: 24rem">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Bronx Zoo</h4>
+                <p class="card-text"> This is the largest zoo in the USA and one of the oldest in the world. It has a total land area of about 265 acres housing around 4000 animals of different species. It is also popular for its award winning exhibitions.</p>
+                <p class="card-text">Wanna find out more? <a href="https://bronxzoo.com/" class="badge badge-info">Click here</a></p>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="text-center">
+                <img class="card-img-top" src="/img/animal.jpg" alt="Card image cap"  style="width: 27rem">
+                <img class="card-img-top" src="/img/sign.jpg" alt="Card image cap"  style="width: 18rem">
+                <img class="card-img-top" src="/img/statenisland.jpeg" alt="Card image cap"  style="width: 14rem">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Staten Island Zoo</h4>
+                <p class="card-text">This zoo is known for being a leader in wildlife conservation. They maintain more than 70 endangered or threatened species. They showcase more than 1,200 animals in an 8-acre park.</p>
+                <p class="card-text">Wanna find out more? <a href="http://www.statenislandzoo.org/" class="badge badge-info">Click here</a></p>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="text-center">
+                <img class="card-img-top" src="/img/bear.jpg" alt="Card image cap"  style="width: 24rem">
+                <img class="card-img-top" src="/img/queenszoo.jpg" alt="Card image cap"  style="width: 26rem">
+                <img class="card-img-top" src="/img/sealion.jpg" alt="Card image cap"  style="width: 24rem">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Queens Zoo</h4>
+                <p class="card-text">This is an 18-acre zoo location in Flushing Meadows-Corona Park in the borough of Queens. It is home to more than 75 species that are native to the Americas.</p>
+                <p class="card-text">Wanna find out more? <a href="https://queenszoo.com/" class="badge badge-info">Click here</a></p>
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-md-8 mx-auto text-center">
+                  <h3>These are some recommedations posted by locals below.</h3>
+              </div>
+            </div>
+              <% if (recs.length == 0) { %>
+                <h4>No recommedations have been posted</h4>
+              <% } else { %> 
+                <div class="row g-4">
+                  <% recs.forEach(function(rec){ %>
+                    <div class="col-lg-3 col-sm-6">
+                      <div class="card" style="width: 35rem;">
+                        <h4 class="card-title"><%= rec.title %></h4>
+                        <p class="card-text"><%= rec.rec_text %></p>
+                        <p class="card-text"><small class="text-muted">Last updated <%= rec.created_at %> by <%= rec.author %></small></p>
+
+                        <hr>
+                        <form action="/recs/<%= rec.id %>" method="POST">
+                          <div class="input-group mb-3">
+                            <input type="hidden" id="category" name="category" value="<%= rec.category %>">
+                            <input type="text" class="form-control" placeholder="Comment" name="comment">
+                            <div class="input-group-append">
+                              <button class="btn btn-primary btn-sm" type="submit"><span class="glyphicon glyphicon-edit"></span> Add comment</button>
+                            </div>
+                          </div>
+                        </form>
+                        <% rec.comments.forEach(function(comment){ %> 
+                          <p class="card-text"><%= comment.comment %></p>
+                          <p class="card-text"><small class="text-muted">Last updated <%= comment.date %> by <%= comment.author %></small></p>
+                        <% }); %>
+                      
+                      </div>
+                    </div>
+                  <% }); %> 
+                </div>
+              <% } %>
+        </div>
+    </section>
+
+    <%- include footer %>

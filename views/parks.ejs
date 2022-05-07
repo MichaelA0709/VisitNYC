@@ -1,0 +1,89 @@
+<%- include header %>
+
+<div class="container-fluid p-5 bg-dark text-white text-center">
+  <h1>Parks</h1>
+</div>
+  
+ <section id="parks" class="bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto text-center">
+                    <h3>NYC has some huge beautiful parks that many can be enjoyed during the day.</h3>
+                </div>
+            </div>
+            <div class="card mb-3">
+              <div class="text-center">
+                <img class="card-img-top" src="/img/centralpark.jpg" alt="Card image cap"  style="width: 26rem">
+                <img class="card-img-top" src="/img/bridge.jpeg" alt="Card image cap"  style="width: 26rem">
+                <img class="card-img-top" src="/img/central.jpeg" alt="Card image cap"  style="width: 28rem">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Central Park</h4>
+                <p class="card-text">This is one of the most famous parks in the world, being the first public park built in America. It is New York's largest urban park and one of the biggest in the world, with 843 acres. There's also many things to do including public tours and family activities.</p>
+                <p class="card-text">Wanna find out more? <a href="https://www.nycgovparks.org/parks/central-park" class="badge badge-info">Click here</a></p>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="text-center">
+                <img class="card-img-top" src="/img/bryant.jpg" alt="Card image cap"  style="width: 23rem">
+                <img class="card-img-top" src="/img/iceskate.jpeg" alt="Card image cap"  style="width: 25rem">
+                <img class="card-img-top" src="/img/yoga.jpg" alt="Card image cap"  style="width: 26rem">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Bryant Park</h4>
+                <p class="card-text">This is a 9.6-acre public park in Midtown Manhattan that attracts many locals and tourirts. They host 1,000 free activities, classes, events, and more annually. On summer evenings, there are free movies in the park, and in winter, ice-skating.</p>
+                <p class="card-text">Wanna find out more? <a href="https://bryantpark.org/" class="badge badge-info">Click here</a></p>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="text-center">
+                <img class="card-img-top" src="/img/flushing.jpg" alt="Card image cap"  style="width: 27rem">
+                <img class="card-img-top" src="/img/globe.jpg" alt="Card image cap"  style="width: 25rem">
+                <img class="card-img-top" src="/img/tennis.jpg" alt="Card image cap"  style="width: 13rem">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Flushing Meadows Corona Park</h4>
+                <p class="card-text">This is one of NYC's most iconic parks. It is 897 acres making it NYC's 4th largest public park. At this park you could take histoic walks, go on scenic trails, or play sports and activities.</p>
+                <p class="card-text">Wanna find out more? <a href="https://www.nycgovparks.org/parks/flushing-meadows-corona-park" class="badge badge-info">Click here</a></p>
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-md-8 mx-auto text-center">
+                  <h3>These are some recommedations posted by locals below.</h3>
+              </div>
+            </div>
+              <% if (recs.length == 0) { %> 
+                <h4>No recommedations have been posted</h4>
+              <% } else { %> 
+                <div class="row g-4">
+                  <% recs.forEach(function(rec){ %>
+                    <div class="col-lg-3 col-sm-6">
+                      <div class="card" style="width: 35rem;">
+                        <h4 class="card-title"><%= rec.title %></h4>
+                        <p class="card-text"><%= rec.rec_text %></p>
+                        <p class="card-text"><small class="text-muted">Last updated <%= rec.created_at %> by <%= rec.author %></small></p>
+                        
+                        <hr>
+                        <form action="/recs/<%= rec.id %>" method="POST">
+                          <div class="input-group mb-3">
+                            <input type="hidden" id="category" name="category" value="<%= rec.category %>">
+                            <input type="text" class="form-control" placeholder="Comment" name="comment">
+                            <div class="input-group-append">
+                              <button class="btn btn-primary btn-sm" type="submit"><span class="glyphicon glyphicon-edit"></span> Add comment</button>
+                            </div>
+                          </div>
+                        </form>
+                        <% rec.comments.forEach(function(comment){ %> 
+                          <p class="card-text"><%= comment.comment %></p>
+                          <p class="card-text"><small class="text-muted">Last updated <%= comment.date %> by <%= comment.author %></small></p>
+                        <% }); %>
+               
+                      </div>
+                    </div>
+                  <% }); %> 
+                </div>
+              <% } %>
+        </div>
+    </section>
+
+    <%- include footer %>

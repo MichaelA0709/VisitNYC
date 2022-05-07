@@ -1,0 +1,90 @@
+<%- include header %>
+
+<div class="container-fluid p-5 bg-dark text-white text-center">
+  <h1>Food/Dining</h1>
+</div>
+  
+ <section id="food" class="bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto text-center">
+                    <h3>There are so many places to eat in NYC. These are some of the best.</h3>
+                </div>
+            </div>
+            <div class="card mb-3">
+               <div class="text-center">
+                <img class="card-img-top" src="/img/cheesecake.jpg" alt="Card image cap"  style="width: 15rem"> 
+                <img class="card-img-top" src="/img/juniors.jpeg" alt="Card image cap"  style="width: 25rem">
+                <img class="card-img-top" src="/img/cake.jpeg" alt="Card image cap"  style="width: 18rem">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Junior's Restaurant</h4>
+                <p class="card-text">Junior's has many locations all over NYC, however the original location is still open and thriving since 1950. It is on Flatbush Avenue in Brooklyn. They have many delicious desserts but they are most known for their cheesecake.</p>
+                <p class="card-text">Wanna find out more? <a href="https://www.juniorscheesecake.com/our-story/" class="badge badge-info">Click here</a></p>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="text-center">
+                <img class="card-img-top" src="/img/hotdog.jpeg" alt="Card image cap"  style="width: 22rem">
+                <img class="card-img-top" src="/img/nathans.png" alt="Card image cap"  style="width: 28rem"> 
+                <img class="card-img-top" src="/img/oldnathans.jpeg" alt="Card image cap"  style="width: 22rem"> 
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Nathan's Famous</h4>
+                <p class="card-text">Nathan's Famous hot dogs originated in NYC and the first location is in the borough of Brooklyn in Coney Island since 1916. Every 4th of July they have a hot dog eating contest which brings a large crowd.</p>
+                <p class="card-text">Wanna find out more? <a href="https://nathansfranks.sfdbrands.com/en-us/about/" class="badge badge-info">Click here</a></p>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="text-center">
+                <img class="card-img-top" src="/img/pastrami.jpg" alt="Card image cap"  style="width: 33rem">
+                <img class="card-img-top" src="/img/katz.jpeg" alt="Card image cap"  style="width: 28rem">
+                <img class="card-img-top" src="/img/nypastrami.jpeg" alt="Card image cap"  style="width: 28rem">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Katz's Delicatessen</h4>
+                <p class="card-text">Katz's Delicatessen is a jewish-style deli located in Manhattan's Lower East Side for more than 130 years. They're most notibly famous for their legendary pastrami and corned beef.</p>
+                <p class="card-text">Wanna find out more? <a href="https://katzsdelicatessen.com/" class="badge badge-info">Click here</a></p>
+              </div>
+           </div>
+            <div class="row mb-5">
+              <div class="col-md-8 mx-auto text-center">
+                  <h3>These are some recommedations posted by locals below.</h3>
+              </div>
+            </div>
+            <% if (recs.length == 0) { %>
+              <h4>No recommedations have been posted</h4>
+            <% } else { %> 
+              <div class="row g-4">
+                <% recs.forEach(function(rec){ %>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="card" style="width: 35rem;">
+                      <h4 class="card-title"><%= rec.title %></h4>
+                      <p class="card-text"><%= rec.rec_text %></p>
+                      <p class="card-text"><small class="text-muted">Last updated <%= rec.created_at %> by <%= rec.author %></small></p>
+
+                      <hr>
+                      <form action="/recs/<%= rec.id %>" method="POST">
+                        <div class="input-group mb-3">
+                          <input type="hidden" id="category" name="category" value="<%= rec.category %>">
+                          <input type="hidden" id="rec_id" name="rec_id" value="<%= rec.rec_id %>">
+                          <input type="text" class="form-control" placeholder="Comment" name="comment">
+                          <div class="input-group-append">
+                            <button class="btn btn-primary btn-sm" type="submit"><span class="glyphicon glyphicon-edit"></span> Add comment</button>
+                          </div>
+                        </div>
+                      </form>
+                      <% rec.comments.forEach(function(comment){ %> 
+                        <p class="card-text"><%= comment.comment %></p>
+                        <p class="card-text"><small class="text-muted">Last updated <%= comment.date %> by <%= comment.author %></small></p>
+                      <% }); %>
+
+                    </div>
+                  </div>
+                <% }); %> 
+              </div>
+            <% } %>
+         </div>
+    </section>
+
+    <%- include footer %>

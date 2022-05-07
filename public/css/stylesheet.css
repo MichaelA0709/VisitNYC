@@ -1,0 +1,27 @@
+body {
+  background: efefef;
+  font-family: "Sora", sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6,
+.display-4 {
+    color: var(--dark);
+    font-weight: 700;
+}
+
+footer {
+      background-color: whitesmoke;
+      color: blue;
+      padding: 15px;
+    }
+
+ .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+      background: darkblue;
+    }
+    
+  #map{
+    height:400px;
+    width:100%;
+  }

@@ -1,0 +1,62 @@
+<html lang="en">
+
+   <%- include header %>
+
+   <div class="container-fluid p-5 bg-dark text-white text-center">
+    <h1>Menu</h1>
+  </div>
+    
+   <section id="menu" class="bg-light">
+          <div class="container">
+              <div class="row mb-5">
+                  <div class="col-md-8 mx-auto text-center">
+                      <h1>Where do you want to go?</h1>
+                      <p>You can never be bored in NYC. This is the menu where you can find the best and most popular places in different categories.</p>
+                  </div>
+              </div>
+              <div class="row g-4">
+                  <div class="col-lg-3 col-sm-6">
+                      <div class="card" style="width: 25rem;">
+                      <img class="card-img-top" src="/img/nypizza.jpeg" alt="Card image cap">
+                      <div class="card-body">
+                      <p class="card-text">There are so many places to eat in NYC. Visit here to find the best.</p>
+                      <a href= "/menu/food" button class="btn btn-primary">Food/Dining</a>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <div class="card" style="width: 25rem;">
+                      <img class="card-img-top" src="/img/museum.jpg" alt="Card image cap">
+                      <div class="card-body">
+                      <p class="card-text">Museums are places that you can see historical, scientific, or cultural interest objects exhibited.</p>
+                      <a href= "/menu/museums" button class="btn btn-primary">Museums</a>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <div class="card" style="width: 25rem;">
+                      <img class="card-img-top" src="/img/zoo.jpeg" alt="Card image cap">
+                      <div class="card-body">
+                      <p class="card-text">If you want to see animals at the zoo, visit here to find them in NYC.</p>
+                      <a href= "/menu/zoos" button class="btn btn-primary">Zoos</a>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <div class="card" style="width: 25rem;">
+                      <img class="card-img-top" src="/img/park.jpg" alt="Card image cap">
+                      <div class="card-body">
+                      <p class="card-text">NYC has some huge beautiful parks that many can be enjoyed during the day.</p>
+                      <a href= "/menu/parks" button class="btn btn-primary">Parks</a>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+              
+                <p class="card-text">Local users are able to recommend places that they think are worth visiting in NYC. If you are a local user, click the button below to create a new recommedation and post it to one of the categories in the menu.</p>
+                <a href= "/menu/newRec" button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span> New Rec</a>
+              
+          </div>
+      </section>
+      
+    <%- include footer %>

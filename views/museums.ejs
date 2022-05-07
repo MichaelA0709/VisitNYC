@@ -1,0 +1,89 @@
+<%- include header %>
+
+<div class="container-fluid p-5 bg-dark text-white text-center">
+  <h1>Museums</h1>
+</div>
+  
+ <section id="museums" class="bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto text-center">
+                    <h3>Museums are places that you can see historical, scientific, or cultural interest objects exhibited.</h3>
+                </div>
+            </div>
+            <div class="card mb-3">
+              <div class="text-center">
+                <img class="card-img-top" src="/img/fossil.jpg" alt="Card image cap"  style="width: 26rem">
+                <img class="card-img-top" src="/img/history.jpg" alt="Card image cap"  style="width: 23rem">
+                <img class="card-img-top" src="/img/whale.jpg" alt="Card image cap"  style="width: 22rem">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">American Museum of Natural History</h4>
+                <p class="card-text">This museum is the largest natural history museum in the world. People from around the world visit for its exhibitions and scientific collections. They have collected more than 33 million specimens relating to the natural world and human cultures since its founding in 1869.</p>
+                <p class="card-text">Wanna find out more? <a href="https://www.amnh.org/" class="badge badge-info">Click here</a></p>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="text-center">
+                <img class="card-img-top" src="/img/moma.jpg" alt="Card image cap"  style="width: 26rem">
+                <img class="card-img-top" src="/img/momabuilding.jpeg" alt="Card image cap"  style="width: 26rem">
+                <img class="card-img-top" src="/img/starrynight.jpeg" alt="Card image cap"  style="width: 23rem">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Museum of Modern Art</h4>
+                <p class="card-text">This museum is home to some of the greatest art in the world. This includes avant-garde painting, sculpture, film, and multi-media art. They still continue to expand their collection to help people understand and enjoy the art of our time.</p>
+                <p class="card-text">Wanna find out more? <a href="https://www.moma.org/" class="badge badge-info">Click here</a></p>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="text-center">
+                <img class="card-img-top" src="/img/icecream.jpg" alt="Card image cap"  style="width: 26rem">
+                <img class="card-img-top" src="/img/icecreambuilding.jpg" alt="Card image cap"  style="width: 27rem">
+                <img class="card-img-top" src="/img/vanilla.jpg" alt="Card image cap"  style="width: 26rem">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Museum of Ice Cream</h4>
+                <p class="card-text">A lot can be learned about ice cream at this museum. It is a very immersive experience with many interactive things to do making it a great place to bring kids. Many different ice cream flavors can also be tasted throughout.</p>
+                <p class="card-text">Wanna find out more? <a href="https://www.museumoficecream.com/new-york-city" class="badge badge-info">Click here</a></p>
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-md-8 mx-auto text-center">
+                  <h3>These are some recommedations posted by locals below.</h3>
+              </div>
+            </div>
+              <% if (recs.length == 0) { %>
+                <h4>No recommedations have been posted</h4>
+              <% } else { %> 
+                <div class="row g-4">
+                  <% recs.forEach(function(rec){ %>
+                    <div class="col-lg-3 col-sm-6">
+                      <div class="card" style="width: 35rem;">
+                        <h4 class="card-title"><%= rec.title %></h4>
+                        <p class="card-text"><%= rec.rec_text %></p>
+                        <p class="card-text"><small class="text-muted">Last updated <%= rec.created_at %> by <%= rec.author %></small></p>
+
+                        <hr>
+                        <form action="/recs/<%= rec.id %>" method="POST">
+                          <div class="input-group mb-3">
+                            <input type="hidden" id="category" name="category" value="<%= rec.category %>">
+                            <input type="text" class="form-control" placeholder="Comment" name="comment">
+                            <div class="input-group-append">
+                              <button class="btn btn-primary btn-sm" type="submit"><span class="glyphicon glyphicon-edit"></span> Add comment</button>
+                            </div>
+                          </div>
+                        </form>
+                        <% rec.comments.forEach(function(comment){ %> 
+                          <p class="card-text"><%= comment.comment %></p>
+                          <p class="card-text"><small class="text-muted">Last updated <%= comment.date %> by <%= comment.author %></small></p>
+                        <% }); %>
+                      
+                      </div>
+                    </div>
+                  <% }); %> 
+                </div>
+              <% } %>
+        </div>
+    </section>
+
+    <%- include footer %>
